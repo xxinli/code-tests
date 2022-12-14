@@ -1,4 +1,4 @@
-import SocialProvider from "../networks";
+import getProviders from "../networks";
 import {TestData} from "../../../no_touching/test_data";
 import Network from "../social/network";
 import { Request, Response } from 'express';
@@ -11,11 +11,16 @@ import { Request, Response } from 'express';
  * @param req
  * @param res
  */
-export default async function orderRoute(req: Request, res: Response) {
-    const social_networks = new SocialProvider().getProviders();
 
-    await sendToSocials(social_networks);
-    await sendEmailNotification();
+/* 
+   better implement message queue here, like RabbitMQ, AWS SQS
+   When a request arrives, produce a message and push it into the queue.
+   Consumer picks up the message, handles tasks like sendToSocials, sendEmailNotification
+*/
+export default async function orderRoute(req: Request, res: Response) {
+    const social_networks = getProviders();
+
+    await Promise.all([sendToSocials(social_networks), sendEmailNotification()]);
 
     res.send('Order placed!');
 }

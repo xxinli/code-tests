@@ -1,11 +1,12 @@
 import Network from "./network";
+import { Environment } from "../../common/environment";
 
 export default class InstagramProvider extends Network  {
     constructor() {
         super();
 
-        this.setAPIEndpoint('https://graph.instagram.com/v2.8/');
-        this.setAccessToken('YnVyZ2VyaGFja2VyMTIz=');
+        this.setAPIEndpoint(Environment.getINEndpoint());
+        this.setAccessToken(Environment.getINToken());
         this.setAPIName('Instagram');
     }
 }
