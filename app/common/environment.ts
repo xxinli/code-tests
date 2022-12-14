@@ -1,4 +1,7 @@
-// fallback values should not be provided in real scenario. For testing purpose only
+/*
+   Environment variables are loaded from .env file.
+   Fallback values should not be provided in real scenario. For testing purpose only
+*/
 export const Environment = {
     getFBEndpoint: (): string => process.env.FB_ENDPOINT || 'https://graph.facebook.com/v2.8/',
     getFBToken: (): string => process.env.FB_ENDPOINT || 'dG9tYXRvbGV0dHVjZTEyM3h4eXpmYWNlYm9vaw==',
